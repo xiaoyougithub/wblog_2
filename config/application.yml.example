@@ -1,5 +1,5 @@
 # This section MUST be configured
-SITE_NAME: "WinDy's Blog"
+SITE_NAME: "XyWalker's Blog"
 
 # domain name used by action cable
 DOMAIN: ''
