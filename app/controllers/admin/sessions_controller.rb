@@ -12,7 +12,7 @@ class Admin::SessionsController < Admin::BaseController
     admin = Administrator.find_by(name: params[:name])
     if admin && admin.authenticate(params[:password])
       admin_sign_in(admin)
-      redirect_to admin_root_path
+      redirect_back_or_default admin_root_path
     else
       flash.now[:alert] = 'Username or password is wrong'
       render 'new'
@@ -22,5 +22,12 @@ class Admin::SessionsController < Admin::BaseController
   def destroy
     admin_sign_out
     redirect_to admin_login_path
+  end
+
+  private
+
+  def redirect_back_or_default(default = admin_root_path)
+    redirect_to(session[:return_to] || default)
+    session[:return_to] = nil
   end
 end
